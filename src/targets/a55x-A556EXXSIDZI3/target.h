@@ -154,15 +154,23 @@
 #define LEFT_OFF 0x5550
 #define FAKE_TASK_OFF 0x3200
 
-#define FAKE_WAITER_TREE_PRIO_OFF 0x18
-#define FAKE_WAITER_TREE_DEADLINE_OFF 0x20
-#define FAKE_WAITER_PI_TREE_ENTRY_OFF 0x28
-#define FAKE_WAITER_PI_TREE_PRIO_OFF 0x40
-#define FAKE_WAITER_PI_TREE_DEADLINE_OFF 0x48
-#define FAKE_WAITER_TASK_OFF 0x50
-#define FAKE_WAITER_LOCK_OFF 0x58
-#define FAKE_WAITER_WAKE_STATE_OFF 0x60
-#define FAKE_WAITER_WW_CTX_OFF 0x68
+/* rt_mutex_waiter layout (verified from vmlinux.btf) */
+#define FAKE_WAITER_TREE_ENTRY_OFF      0x00   /* tree_entry.rb_node.__rb_parent_color */
+#define FAKE_WAITER_TREE_RIGHT_OFF      0x08   /* tree_entry.rb_node.rb_right */
+#define FAKE_WAITER_TREE_LEFT_OFF       0x10   /* tree_entry.rb_node.rb_left */
+#define FAKE_WAITER_PI_TREE_ENTRY_OFF   0x18   /* pi_tree_entry.rb_node.__rb_parent_color */
+#define FAKE_WAITER_PI_TREE_RIGHT_OFF   0x20   /* pi_tree_entry.rb_node.rb_right */
+#define FAKE_WAITER_PI_TREE_LEFT_OFF    0x28   /* pi_tree_entry.rb_node.rb_left */
+#define FAKE_WAITER_TASK_OFF            0x30   /* task pointer */
+#define FAKE_WAITER_LOCK_OFF            0x38   /* lock pointer (rt_mutex_base *) */
+#define FAKE_WAITER_WAKE_STATE_OFF      0x40   /* wake_state */
+#define FAKE_WAITER_PRIO_OFF            0x44   /* prio */
+#define FAKE_WAITER_DEADLINE_OFF        0x48   /* deadline */
+#define FAKE_WAITER_WW_CTX_OFF          0x50   /* ww_acquire_ctx * */
+#define FAKE_WAITER_SIZE                0x58   /* sizeof(rt_mutex_waiter) = 88 */
+#define FAKE_WAITER_LAYOUT_SIZE         FAKE_WAITER_SIZE
+
+#define COMPACT_RT_MUTEX_WAITER 1
 
 #define FAKE_TASK_USAGE_OFF 0x40
 #define FAKE_TASK_PRIO_OFF 0x84
@@ -202,6 +210,8 @@
 #define PIPE_BUFFER_SLOTS 32
 #define PIPE_BUF_FLAG_CAN_MERGE 0x10
 
+/* file_operations layout (verified from vmlinux.btf, size=0x110) */
+#define SIZEOF_FILE_OPERATIONS 0x110
 #define FOPS_OWNER_OFF 0x00
 #define FOPS_LLSEEK_OFF 0x08
 #define FOPS_READ_OFF 0x10
