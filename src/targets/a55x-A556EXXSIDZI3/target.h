@@ -3,10 +3,10 @@
 
 #if defined(APP_PAYLOAD) && APP_PAYLOAD
 #define BUILD_VARIANT_LABEL \
-  "essi-A556EXXSIDZI3-app-physical-p0-20msx8-safe4-fops-safe"
+  "a55x-A556EXXSIDZI3-app-physical-p0-20msx8-safe4-fops-safe"
 #define APP_PHYS_P0_ORACLE 1
 #else
-#define BUILD_VARIANT_LABEL "essi-A556EXXSIDZI3-root-umh"
+#define BUILD_VARIANT_LABEL "a55x-A556EXXSIDZI3-root-umh"
 #endif
 
 #ifndef BUILD_FINGERPRINT
@@ -72,7 +72,7 @@
 #define P0_ORACLE_GATE_OBJECT_INDEX 1
 #define P0_ORACLE_PROBE_OFFSET 0x1f0000ULL
 #define P0_FINGERPRINT_HEADER \
-  "targets/essi-A556EXXSIDZI3/p0_fingerprint.h"
+  "targets/a55x-A556EXXSIDZI3/p0_fingerprint.h"
 #endif
 
 #define KERNELSNITCH_IDENTITY_START 0xffffff8000000000ULL
